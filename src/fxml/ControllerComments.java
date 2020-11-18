@@ -16,16 +16,5 @@ public class ControllerComments {
     public TextArea commentarea;
 
     public void sendComment(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("scene.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
     }
 }
