@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="135.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ControllerPriorities">
-    <children>
-        <TextField fx:id="nameField" layoutX="67.0" layoutY="41.0" AnchorPane.bottomAnchor="68.4" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="66.19999999999999" AnchorPane.topAnchor="41.0" />
-        <Label layoutX="67.0" layoutY="24.0" text="Name" AnchorPane.bottomAnchor="93.4" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="183.0" AnchorPane.topAnchor="24.0" />
-        <Button layoutX="116.0" layoutY="86.0" mnemonicParsing="false" onAction="#sendName" prefHeight="26.0" prefWidth="60.0" text="Senden" AnchorPane.bottomAnchor="23.0" AnchorPane.leftAnchor="116.0" AnchorPane.rightAnchor="106.0" AnchorPane.topAnchor="86.0" />
-    </children>
+<AnchorPane prefHeight="113.0" prefWidth="295.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxml.ControllerStati">
+   <children>
+      <TextField fx:id="nameField" layoutX="14.0" layoutY="32.0" prefHeight="25.0" prefWidth="255.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="32.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Button layoutX="16.0" layoutY="95.0" mnemonicParsing="false" onAction="#sendName" prefHeight="26.0" prefWidth="60.0" text="Senden" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="16.0" />
+      <Button layoutX="89.0" layoutY="96.0" mnemonicParsing="false" text="Löschen" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="89.0" />
+   </children>
 </AnchorPane>
