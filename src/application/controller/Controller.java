@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.MyFXMLLoader;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,88 +12,13 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class Controller {
-
-    public void CommentsPressed(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/comments.application.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
+    public void editStartiClicked(ActionEvent actionEvent) {
+        MyFXMLLoader loader = new MyFXMLLoader();
+        loader.loadFXML("view/Stati.fxml", "Stati bearbeiten!");
     }
 
-    public void DepartmentsPressed(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/departments.application.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
-    }
-
-    public void PrioritiesPressed(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/Priorities.application.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
-    }
-
-    public void StatiPressed(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/Stati.application.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
-    }
-
-    public void TicketsPressed(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/tickets.application.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
-    }
-
-    public void UserPressed(ActionEvent actionEvent) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/user.application.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("ABC");
-            stage.setScene(new Scene(root1));
-            stage.show();
-        } catch (IOException e) {
-
-        }
+    public void editPrioClicked(ActionEvent actionEvent) {
+        MyFXMLLoader loader = new MyFXMLLoader();
+        loader.loadFXML("view/Priorities.fxml", "Prioritäten bearbeiten");
     }
 }
