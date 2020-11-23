@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="340.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ControllerStati">
+<AnchorPane prefHeight="340.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ControllerPriorities">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -18,11 +18,11 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="346.0">
                <children>
-                  <Button fx:id="saveEntry" layoutX="14.0" layoutY="355.0" mnemonicParsing="false" text="Speichern" AnchorPane.bottomAnchor="13.000000000000021" AnchorPane.leftAnchor="14.0" />
-                  <Button fx:id="newEntry" layoutX="83.0" layoutY="355.0" mnemonicParsing="false" text="Neu" AnchorPane.bottomAnchor="13.000000000000021" AnchorPane.leftAnchor="97.0" />
-                  <TextField layoutX="23.0" layoutY="14.0" prefHeight="26.0" prefWidth="304.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="28.0" />
+                  <Button layoutX="14.0" layoutY="355.0" mnemonicParsing="false" onAction="#saveEntry" text="Speichern" AnchorPane.bottomAnchor="13.000000000000021" AnchorPane.leftAnchor="14.0" />
+                  <Button layoutX="83.0" layoutY="355.0" mnemonicParsing="false" onAction="#newEntry" text="Neu" AnchorPane.bottomAnchor="13.000000000000021" AnchorPane.leftAnchor="97.0" />
+                  <TextField fx:id="priovalue" layoutX="23.0" layoutY="14.0" prefHeight="26.0" prefWidth="304.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="28.0" />
                   <Label layoutX="23.0" layoutY="14.0" text="Priorität" AnchorPane.leftAnchor="23.0" AnchorPane.topAnchor="14.0" />
-                  <Button fx:id="delEntry" layoutX="135.0" layoutY="355.0" mnemonicParsing="false" text="Löschen" AnchorPane.bottomAnchor="13.000000000000021" AnchorPane.leftAnchor="149.0" />
+                  <Button layoutX="135.0" layoutY="355.0" mnemonicParsing="false" onAction="#delEntry" text="Löschen" AnchorPane.bottomAnchor="13.000000000000021" AnchorPane.leftAnchor="149.0" />
                </children>
             </AnchorPane>
         </items>
