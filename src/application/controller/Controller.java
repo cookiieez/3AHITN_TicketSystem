@@ -1,3 +1,5 @@
+package application.controller;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +14,7 @@ public class Controller {
 
     public void CommentsPressed(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/comments.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/comments.application.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -26,7 +28,7 @@ public class Controller {
 
     public void DepartmentsPressed(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/departments.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/departments.application.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -40,7 +42,7 @@ public class Controller {
 
     public void PrioritiesPressed(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Priorities.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/Priorities.application.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -54,7 +56,7 @@ public class Controller {
 
     public void StatiPressed(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Stati.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/Stati.application.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -68,7 +70,7 @@ public class Controller {
 
     public void TicketsPressed(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/tickets.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/tickets.application.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -82,7 +84,7 @@ public class Controller {
 
     public void UserPressed(ActionEvent actionEvent) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/user.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("application.fxml/user.application.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
