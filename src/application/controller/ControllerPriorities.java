@@ -36,7 +36,6 @@ public class ControllerPriorities {
                     a.priority = words[0];
                     a.desc = words[1];
                     PrioView.getItems().add(a);
-                    allArticles.add(a);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
