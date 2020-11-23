@@ -1,7 +1,10 @@
 package application.controller;
 
 import application.model.Priority;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -15,11 +18,13 @@ import java.util.ArrayList;
 
 public class ControllerPriorities {
     public TextField priovalue;
+    public TextField descvalue;
     public ListView PrioView;
     public ArrayList<Priority> allArticles = new ArrayList<>();
 
     public void initialize() {
         readDocument();
+
     }
 
     private void readDocument() {
@@ -43,9 +48,6 @@ public class ControllerPriorities {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-    }
-
-    public void sendName(ActionEvent actionEvent) {
     }
 
     public void saveEntry(ActionEvent actionEvent) {
