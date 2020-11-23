@@ -9,4 +9,13 @@ public class ControllerPriorities {
 
     public void sendName(ActionEvent actionEvent) {
     }
+
+    public void saveEntry(ActionEvent actionEvent) {
+    }
+
+    public void newEntry(ActionEvent actionEvent) {
+    }
+
+    public void delEntry(ActionEvent actionEvent) {
+    }
 }
