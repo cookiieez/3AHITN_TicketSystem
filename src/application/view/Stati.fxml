@@ -13,7 +13,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="129.0">
                <children>
-                  <ListView fx:id="statiList" prefHeight="293.0" prefWidth="123.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ListView fx:id="statiList" onMouseClicked="#statiClicked" prefHeight="293.0" prefWidth="123.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="307.0">
@@ -23,6 +23,7 @@
                     <Button mnemonicParsing="false" onAction="#speichernClicked" prefHeight="26.0" prefWidth="69.0" text="Speichern" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
                   <Button layoutX="145.0" layoutY="253.0" mnemonicParsing="false" onAction="#löschenClicked" text="Löschen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="145.0" />
                   <Button layoutX="93.0" layoutY="253.0" mnemonicParsing="false" onAction="#neuClicked" text="Neu" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="95.0" />
+                  <Button fx:id="abbrechenButton" layoutX="216.0" layoutY="281.0" mnemonicParsing="false" onAction="#abbrechenClicked" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="216.0" />
                </children>
             </AnchorPane>
         </items>
