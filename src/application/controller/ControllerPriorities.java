@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -21,6 +22,7 @@ public class ControllerPriorities {
     public TextField descvalue;
     public ListView PrioView;
     public ArrayList<Priority> allArticles = new ArrayList<>();
+    public Button closebutton;
 
     public void initialize() {
         readDocument();
@@ -57,5 +59,10 @@ public class ControllerPriorities {
     }
 
     public void delEntry(ActionEvent actionEvent) {
+    }
+
+    public void windowClose(ActionEvent actionEvent) {
+        Stage stage = (Stage) closebutton.getScene().getWindow();
+        stage.close();
     }
 }
