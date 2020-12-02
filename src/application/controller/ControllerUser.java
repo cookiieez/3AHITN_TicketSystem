@@ -29,7 +29,7 @@ public class ControllerUser {
         String s;
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("user.csv"));
+            br = new BufferedReader(new FileReader("users.csv"));
             try {
                 while ((s = br.readLine()) != null) {
                     s = s.replace("\"", "");
