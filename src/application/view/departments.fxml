@@ -2,14 +2,31 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="135.0" prefWidth="282.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ControllerDepartments">
+<AnchorPane prefHeight="324.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ControllerDepartments">
    <children>
-      <TextField fx:id="nameField" layoutX="67.0" layoutY="41.0" AnchorPane.bottomAnchor="68.4" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="66.19999999999999" AnchorPane.topAnchor="41.0" />
-      <Label layoutX="67.0" layoutY="24.0" prefHeight="18.0" prefWidth="60.0" text="Abteilung" AnchorPane.bottomAnchor="93.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="24.0" />
-      <Button layoutX="67.0" layoutY="85.0" mnemonicParsing="false" onAction="#sendName" prefHeight="26.0" prefWidth="60.0" text="Senden" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="67.0" AnchorPane.rightAnchor="155.0" AnchorPane.topAnchor="85.0" />
-      <Button layoutX="156.0" layoutY="85.0" mnemonicParsing="false" onAction="#deleteName" prefHeight="26.0" prefWidth="60.0" text="Löschen" />
+      <SplitPane dividerPositions="0.3419811320754717" prefHeight="295.0" prefWidth="401.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="129.0">
+               <children>
+                  <ListView fx:id="depList" onMouseClicked="#depClicked" prefHeight="293.0" prefWidth="123.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="307.0" prefWidth="307.0">
+               <children>
+                  <TextField fx:id="depField" prefHeight="25.0" prefWidth="255.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0" />
+                  <Label text="Abteilung" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+                  <Button mnemonicParsing="false" onAction="#speichernClicked" prefHeight="26.0" prefWidth="69.0" text="Speichern" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+                  <Button layoutX="145.0" layoutY="253.0" mnemonicParsing="false" onAction="#löschenClicked" text="Löschen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="145.0" />
+                  <Button layoutX="93.0" layoutY="253.0" mnemonicParsing="false" onAction="#neuClicked" text="Neu" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="95.0" />
+                  <Button fx:id="abbrechenButton" layoutX="216.0" layoutY="281.0" mnemonicParsing="false" onAction="#abbrechenClicked" text="Abbrechen" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="216.0" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>
