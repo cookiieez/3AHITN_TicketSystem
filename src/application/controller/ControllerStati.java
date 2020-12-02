@@ -49,7 +49,6 @@ public class ControllerStati {
                     }
                 } finally {
                     br.close();
-
                 }
             } catch (IOException io) {
                 io.printStackTrace();
