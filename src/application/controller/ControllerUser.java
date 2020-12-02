@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,7 +18,9 @@ public class ControllerUser {
     public TextField streetField;
     public TextField zipField;
     public ComboBox departmentIdCombo;
-    public ListView userView;
+    public ListView<User> userView;
+
+    public User selectedItem;
 
     public void sendUser(ActionEvent actionEvent) {
     }
@@ -51,5 +54,13 @@ public class ControllerUser {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void userClicked(MouseEvent mouseEvent) {
+        selectedItem = userView.getSelectionModel().getSelectedItem();
+        titleField.setText(selectedItem.title);
+        nameField.setText(selectedItem.name);
+        streetField.setText(selectedItem.street);
+        zipField.setText(selectedItem.zip);
     }
 }

@@ -1,10 +1,7 @@
 package application.controller;
 
 import application.model.Priority;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -15,14 +12,13 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class ControllerPriorities {
     public TextField priovalue;
     public TextField descvalue;
-    public ListView PrioView;
-    public ArrayList<Priority> allArticles = new ArrayList<>();
+    public ListView<Priority> PrioView;
     public Button closebutton;
+    public Priority selectedItem;
 
     public void initialize() {
         readDocument();
@@ -64,5 +60,11 @@ public class ControllerPriorities {
     public void windowClose(ActionEvent actionEvent) {
         Stage stage = (Stage) closebutton.getScene().getWindow();
         stage.close();
+    }
+
+    public void priorityClicked(MouseEvent mouseEvent) {
+        selectedItem = PrioView.getSelectionModel().getSelectedItem();
+        priovalue.setText(selectedItem.priority);
+        descvalue.setText(selectedItem.desc);
     }
 }
