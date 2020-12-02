@@ -1,10 +1,14 @@
 package application.model;
 
 public class User {
-    public int nummer = 0;
-    public String status = "";
+    public String abtnumemr;
+    public String title = "";
+    public String name = "";
+    public String street = "";
+    public String zip;
+    public String city = "";
 
     public String toString() {
-        return nummer + "-" + status;
+        return title + " " + name;
     }
 }

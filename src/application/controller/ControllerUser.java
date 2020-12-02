@@ -1,6 +1,6 @@
 package application.controller;
 
-import application.model.Priority;
+import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -35,9 +35,14 @@ public class ControllerUser {
                     s = s.replace("\"", "");
                     String[] words = s.split(";");
 
-                    Priority a = new Priority();
-                    a.priority = words[0];
-                    a.desc = words[1];
+                    User a = new User();
+                    a.abtnumemr = words[0];
+                    a.title = words[1];
+                    a.name = words[2];
+                    a.street = words[3];
+                    a.zip = words[4];
+                    a.city = words[5];
+
                     userView.getItems().add(a);
                 }
             } catch (IOException e) {
