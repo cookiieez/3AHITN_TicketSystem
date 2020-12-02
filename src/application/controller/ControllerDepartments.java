@@ -105,7 +105,7 @@ public class ControllerDepartments {
     private void writeFile() {
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("stati.csv"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("departments.csv"));
             try {
 
                 for (Departments d : liste) {
