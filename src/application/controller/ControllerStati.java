@@ -1,7 +1,6 @@
 package application.controller;
 
 import application.model.Status;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,9 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-
-import java.io.*;
 
 
 public class ControllerStati {
@@ -28,7 +24,6 @@ public class ControllerStati {
     public void initialize(){
         statiList.setItems(Status.loadFile("stati.csv"));
     }
-
 
     public void statiClicked(MouseEvent mouseEvent) {
         nameField.setText(statiList.getSelectionModel().getSelectedItem().status);
@@ -60,37 +55,15 @@ public class ControllerStati {
             }
             num++;
         }
-        writeFile();
+        Status.writeFile("stati.csv", liste);
     }
 
     public void löschenClicked(ActionEvent actionEvent) {
         nameField.clear();
         num--;
         liste.remove(selectedItem);
-        writeFile();
+        Status.writeFile("stati.csv", liste);
     }
-
-
-    private void writeFile() {
-
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("stati.csv"));
-            try {
-
-                for (Status s : liste) {
-                    bw.write(s.nummer + ";" + s.status + "\n");
-                }
-
-                bw.flush();
-            } finally {
-                bw.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public void abbrechenClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) abbrechenButton.getScene().getWindow();

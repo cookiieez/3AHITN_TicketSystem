@@ -52,14 +52,14 @@ public class ControllerDepartments {
             }
             num++;
         }
-        writeFile();
+        Departments.writeFile("departments.csv", liste);
     }
 
     public void löschenClicked(ActionEvent actionEvent) {
         depField.clear();
         num--;
         liste.remove(selectedItem);
-        writeFile();
+        Departments.writeFile("departments.csv", liste);
     }
 
     public void neuClicked(ActionEvent actionEvent) {
@@ -73,24 +73,5 @@ public class ControllerDepartments {
         stage.close();
     }
 
-    private void writeFile() {
-
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("departments.csv"));
-            try {
-
-                for (Departments d : liste) {
-                    bw.write(d.nummer + ";" + d.department + "\n");
-                }
-
-                bw.flush();
-            } finally {
-                bw.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

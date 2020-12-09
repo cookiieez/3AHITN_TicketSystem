@@ -4,9 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.input.MouseEvent;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Status {
 
@@ -50,5 +48,23 @@ public class Status {
         return result;
     }
 
+    public static void writeFile(String filename, ObservableList<Status> liste) {
 
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("stati.csv"));
+            try {
+
+                for (Status s : liste) {
+                    bw.write(s.nummer + ";" + s.status + "\n");
+                }
+
+                bw.flush();
+            } finally {
+                bw.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

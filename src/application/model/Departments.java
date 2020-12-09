@@ -3,9 +3,7 @@ package application.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Departments {
 
@@ -47,5 +45,25 @@ public class Departments {
             io.printStackTrace();
         }
         return result;
+    }
+
+    public static void writeFile(String filename, ObservableList<Departments> liste) {
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("departments.csv"));
+            try {
+
+                for (Departments d : liste) {
+                    bw.write(d.nummer + ";" + d.department + "\n");
+                }
+
+                bw.flush();
+            } finally {
+                bw.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
