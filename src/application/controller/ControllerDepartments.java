@@ -24,38 +24,9 @@ public class ControllerDepartments {
     private Departments selectedItem = null;
 
     public void initialize() {
-        loadFile();
+        depList.setItems(Departments.loadFile("departments.csv"));
     }
 
-    public void loadFile() {
-        String zeile = null;
-        BufferedReader br = null;
-
-
-        try {
-            br = new BufferedReader(new FileReader("departments.csv"));
-
-            try {
-                while ((zeile = br.readLine()) != null) {
-                    String[] split = zeile.split(";");
-
-                    Departments d = new Departments();
-                    d.nummer = Integer.parseInt(split[0]);
-                    d.department = split[1];
-
-                    liste.add(d);
-                    num++;
-
-                }
-            } finally {
-                br.close();
-
-            }
-        } catch (IOException io) {
-            io.printStackTrace();
-        }
-        depList.setItems(liste);
-    }
 
     public void depClicked(MouseEvent mouseEvent) {
         depField.setText(depList.getSelectionModel().getSelectedItem().department);

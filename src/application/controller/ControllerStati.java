@@ -25,36 +25,9 @@ public class ControllerStati {
 
     private Status selectedItem = null;
 
-    public void initialize(){loadFile();}
-
-    public void loadFile() {
-        String zeile = null;
-        BufferedReader br = null;
-
-
-            try {
-                br = new BufferedReader(new FileReader("stati.csv"));
-
-                try {
-                    while ((zeile = br.readLine()) != null) {
-                        String[] split = zeile.split(";");
-
-                        Status s = new Status();
-                        s.nummer = Integer.parseInt(split[0]);
-                        s.status = split[1];
-
-                        liste.add(s);
-                        num++;
-
-                    }
-                } finally {
-                    br.close();
-                }
-            } catch (IOException io) {
-                io.printStackTrace();
-            }
-            statiList.setItems(liste);
-        }
+    public void initialize(){
+        statiList.setItems(Status.loadFile("stati.csv"));
+    }
 
 
     public void statiClicked(MouseEvent mouseEvent) {
