@@ -8,12 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-public class ControllerPriorities {
+public class ControllerPriorities extends Priority{
     public TextField priovalue;
     public TextField descvalue;
     public ListView<Priority> PrioView;
@@ -21,31 +16,7 @@ public class ControllerPriorities {
     public Priority selectedItem;
 
     public void initialize() {
-        readDocument();
-
-    }
-
-    private void readDocument() {
-        String s;
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader("priorities.csv"));
-            try {
-                while ((s = br.readLine()) != null) {
-                    s = s.replace("\"", "");
-                    String[] words = s.split(";");
-
-                    Priority a = new Priority();
-                    a.priority = words[0];
-                    a.desc = words[1];
-                    PrioView.getItems().add(a);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        readDocument(PrioView);
     }
 
     public void saveEntry(ActionEvent actionEvent) {
