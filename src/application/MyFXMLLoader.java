@@ -40,6 +40,19 @@ public class MyFXMLLoader {
         }
     }
 
+    public Parent loadFXML(String fxmlPath) {
+        Parent result = null;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlPath));
+            result = fxmlLoader.load();
+            controller = fxmlLoader.getController();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
     public Stage getActualStage() {
         return actualStage;
     }
