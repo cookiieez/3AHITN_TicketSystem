@@ -18,8 +18,8 @@
       <Label layoutX="16.0" layoutY="286.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="286.0" />
       <Label layoutX="16.0" layoutY="327.0" text="Priorität" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="327.0" />
       <ComboBox layoutX="70.0" layoutY="244.0" prefHeight="25.0" prefWidth="489.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="244.0" />
-      <ComboBox layoutX="70.0" layoutY="282.0" prefHeight="25.0" prefWidth="489.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="282.0" />
-      <ComboBox layoutX="70.0" layoutY="323.0" prefHeight="25.0" prefWidth="489.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="323.0" />
+      <ComboBox fx:id="ticketStati" layoutX="70.0" layoutY="282.0" prefHeight="25.0" prefWidth="489.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="282.0" />
+      <ComboBox fx:id="ticketPriority" layoutX="70.0" layoutY="323.0" prefHeight="25.0" prefWidth="489.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="323.0" />
       <Button layoutX="86.0" layoutY="410.0" mnemonicParsing="false" text="Löschen" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="86.0" />
     </children>
 </AnchorPane>

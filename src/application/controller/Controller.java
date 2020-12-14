@@ -1,6 +1,10 @@
 package application.controller;
 
 import application.MyFXMLLoader;
+import application.model.Departments;
+import application.model.Ticket;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,8 +19,13 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class Controller {
-    public ListView ticketListView;
+    public ListView<Ticket> ticketListView;
     public AnchorPane contentPain;
+
+
+    public void initialize() {
+        ticketListView.setItems(Ticket.loadFile("tickets.csv"));
+    }
 
     public void editStartiClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
@@ -45,7 +54,7 @@ public class Controller {
         contentPain.getChildren().add(root);
 
         ControllerTickets controller = (ControllerTickets) loader.getController();
-
+        controller.setTicket(ticketListView.getSelectionModel().getSelectedItem());
 
     }
 }
