@@ -2,6 +2,8 @@ package application.controller;
 
 import application.MyFXMLLoader;
 import application.model.Departments;
+import application.model.Priority;
+import application.model.Status;
 import application.model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,7 +11,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -21,9 +25,18 @@ import java.io.IOException;
 public class Controller {
     public ListView<Ticket> ticketListView;
     public AnchorPane contentPain;
+    // neue Felder
+    /**
+     * Filter müssen UND - Verknüpft werden!
+     */
+    public TextField filterNameTextField; // filtern nach name des Todos
+    public ComboBox<Status> filterStatusComboBox; // filtern nach Status
+    public ComboBox<Priority> filterPriorityComboBox; // filtern nach Priorität
 
 
     public void initialize() {
+
+        filterStatusComboBox.setItems(Status.loadFile("stati.csv"));
         ticketListView.setItems(Ticket.loadFile("tickets.csv"));
     }
 
