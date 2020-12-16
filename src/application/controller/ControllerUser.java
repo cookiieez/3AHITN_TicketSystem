@@ -1,8 +1,6 @@
 package application.controller;
 
 import application.model.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -15,20 +13,22 @@ public class ControllerUser extends User {
     public TextField streetField;
     public TextField zipField;
     public ComboBox departmentIdCombo;
-    public ListView<User> userList;
-    ObservableList<User> liste = FXCollections.observableArrayList();
+    public ListView<User> userView;
 
     public User selectedItem;
 
     public void sendUser(ActionEvent actionEvent) {
     }
     public void initialize(){
-        userList.setItems(User.loadFile("users.csv"));
+        userView.setItems(User.loadFile("users.csv"));
     }
 
     public void userClicked(MouseEvent mouseEvent) {
-        nameField.setText(userList.getSelectionModel().getSelectedItem().name);
+        nameField.setText(userView.getSelectionModel().getSelectedItem().name);
+        titleField.setText(userView.getSelectionModel().getSelectedItem().title);
+        streetField.setText(userView.getSelectionModel().getSelectedItem().street);
+        zipField.setText(userView.getSelectionModel().getSelectedItem().zip);
 
-        selectedItem = userList.getSelectionModel().getSelectedItem();
+        selectedItem = userView.getSelectionModel().getSelectedItem();
     }
 }

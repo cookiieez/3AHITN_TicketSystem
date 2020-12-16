@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.io.*;
 
 public class User {
-    public String abtnumemr;
+    public String abtnumemr = "";
     public String title = "";
     public String name = "";
     public String street = "";
@@ -33,13 +33,11 @@ public class User {
                     String[] split = zeile.split(";");
 
                     User u = new User();
-                    u.abtnumemr = split[0];
                     u.title = split[1];
                     u.name = split[2];
                     u.zip = split[3];
                     u.street = split[4];
                     u.city = split[5];
-                    u.abtnumemr = split[6];
 
                     result.add(u);
                     num++;
