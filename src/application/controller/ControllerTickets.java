@@ -11,8 +11,8 @@ import javafx.scene.control.TextField;
 public class ControllerTickets {
     public TextArea commentarea;
     public TextField titlefield;
-    public ComboBox ticketStati;
-    public ComboBox ticketPriority;
+    public ComboBox<Status> ticketStati;
+    public ComboBox<Priority> ticketPriority;
 
     private Ticket ticket;
 
@@ -29,9 +29,13 @@ public class ControllerTickets {
             }
         }
 
+        for (Priority p : ticketPriority.getItems()){
+            if(p.priority == t.priority.priority){
+                ticketPriority.getSelectionModel().select(p);
+            }
+        }
 
 
-        ticketPriority.getSelectionModel().select(t.priority.priority);
 
     }
 

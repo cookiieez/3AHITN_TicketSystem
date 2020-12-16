@@ -1,27 +1,19 @@
 package application.controller;
 
 import application.MyFXMLLoader;
-import application.model.Departments;
 import application.model.Priority;
 import application.model.Status;
 import application.model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.IOException;
 
 public class Controller {
     public ListView<Ticket> ticketListView;
@@ -41,6 +33,8 @@ public class Controller {
     public ComboBox<Priority> filterPriorityComboBox; // filtern nach Priorität
 
     private ControllerTickets active = null;
+
+    Ticket selcetedItem = null;
 
 
     public void initialize() {
@@ -79,6 +73,8 @@ public class Controller {
         active = (ControllerTickets) loader.getController();
         active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
 
+        selcetedItem = ticketListView.getSelectionModel().getSelectedItem();
+
     }
 
     public void searchReleased(KeyEvent keyEvent) {
@@ -95,7 +91,7 @@ public class Controller {
         ticketListView.setItems(searchNameList);
     }
 
-    public void statiSearch(MouseEvent mouseEvent) {
+    public void statiSearch(ActionEvent mouseEvent) {
         int searched = filterStatusComboBox.getSelectionModel().getSelectedItem().nummer;
 
         searchStatiList.clear();
@@ -112,6 +108,13 @@ public class Controller {
     public void saveClicked(ActionEvent actionEvent) {
         //Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste
         //Datei aktualisieren
+
+        if(selcetedItem != null){
+            active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
+
+            ticketListView.refresh();
+            ticketListView.setItems(liste);
+        }
     }
 
     public void newClicked(ActionEvent actionEvent) {

@@ -58,7 +58,7 @@
         </items>
       </SplitPane>
       <Label layoutX="14.0" layoutY="35.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="35.0" />
-      <ComboBox fx:id="filterStatusComboBox" layoutX="50.0" layoutY="31.0" onMousePressed="#statiSearch" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="31.0" />
+      <ComboBox fx:id="filterStatusComboBox" layoutX="50.0" layoutY="31.0" onAction="#statiSearch" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="31.0" />
       <ComboBox fx:id="filterPriorityComboBox" layoutX="275.0" layoutY="31.0" prefWidth="150.0" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="31.0" />
       <Label layoutX="225.0" layoutY="35.0" text="Priorität" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="35.0" />
       <Button layoutX="570.0" layoutY="409.0" mnemonicParsing="false" onAction="#saveClicked" text="Speichern" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
