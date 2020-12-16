@@ -1,11 +1,9 @@
 package application.model;
 
-import javafx.scene.control.ListView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class User {
     public String abtnumemr;
@@ -15,34 +13,64 @@ public class User {
     public String zip;
     public String city = "";
 
+    private static int num = 0;
+
     public String toString() {
         return title + " " + name;
     }
 
-    public static void readDocument(ListView<User> Listview) {
-        String s;
+    public static ObservableList<User> loadFile(String filename) {
+        ObservableList<User> result = FXCollections.observableArrayList();
+        String zeile = null;
         BufferedReader br = null;
+
+
         try {
-            br = new BufferedReader(new FileReader("users.csv"));
+            br = new BufferedReader(new FileReader(filename));
+
             try {
-                while ((s = br.readLine()) != null) {
-                    s = s.replace("\"", "");
-                    String[] words = s.split(";");
+                while ((zeile = br.readLine()) != null) {
+                    String[] split = zeile.split(";");
 
-                    User a = new User();
-                    a.abtnumemr = words[0];
-                    a.title = words[1];
-                    a.name = words[2];
-                    a.street = words[3];
-                    a.zip = words[4];
-                    a.city = words[5];
+                    User u = new User();
+                    u.abtnumemr = split[0];
+                    u.title = split[1];
+                    u.name = split[2];
+                    u.zip = split[3];
+                    u.street = split[4];
+                    u.city = split[5];
+                    u.abtnumemr = split[6];
 
-                    Listview.getItems().add(a);
+                    result.add(u);
+                    num++;
+
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } finally {
+                br.close();
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+        return result;
+    }
+
+    public static void writeFile(String filename, ObservableList<User> liste) {
+        int i = 1;
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("users.csv"));
+            try {
+
+                for (User u : liste) {
+                    bw.write(i + ";" + u.title + ";" + u.name + ";" + u.street + ";" + u.zip +";" + u.city + ";" + u.abtnumemr + "\n");
+                    i++;
+                }
+
+                bw.flush();
+            } finally {
+                bw.close();
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
