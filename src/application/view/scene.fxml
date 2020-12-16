@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="436.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="653.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller">
    <children>
       <MenuBar prefHeight="26.0" prefWidth="653.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
@@ -45,11 +46,11 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.29797979797979796" layoutX="8.0" layoutY="63.0" prefHeight="373.0" prefWidth="653.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="63.0">
+      <SplitPane dividerPositions="0.29797979797979796" layoutX="8.0" layoutY="63.0" prefHeight="342.0" prefWidth="653.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="63.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TextField fx:id="filterNameTextField" prefHeight="25.0" prefWidth="191.0" promptText="Name des Todos..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <TextField fx:id="filterNameTextField" onKeyReleased="#searchReleased" prefHeight="25.0" prefWidth="191.0" promptText="Name des Todos..." AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <ListView fx:id="ticketListView" layoutY="32.0" onMouseClicked="#ticketListViewClicked" prefHeight="339.0" prefWidth="191.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0" />
                </children>
             </AnchorPane>
@@ -57,8 +58,11 @@
         </items>
       </SplitPane>
       <Label layoutX="14.0" layoutY="35.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="35.0" />
-      <ComboBox fx:id="filterStatusComboBox" layoutX="50.0" layoutY="31.0" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="31.0" />
+      <ComboBox fx:id="filterStatusComboBox" layoutX="50.0" layoutY="31.0" onMousePressed="#statiSearch" prefWidth="150.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="31.0" />
       <ComboBox fx:id="filterPriorityComboBox" layoutX="275.0" layoutY="31.0" prefWidth="150.0" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="31.0" />
       <Label layoutX="225.0" layoutY="35.0" text="Priorität" AnchorPane.leftAnchor="225.0" AnchorPane.topAnchor="35.0" />
+      <Button layoutX="570.0" layoutY="409.0" mnemonicParsing="false" onAction="#saveClicked" text="Speichern" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+      <Button layoutX="5.0" layoutY="409.0" mnemonicParsing="false" onAction="#newClicked" text="Neu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
+      <Button layoutX="50.0" layoutY="409.0" mnemonicParsing="false" onAction="#delClicked" text="Löschen" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="50.0" />
    </children>
 </AnchorPane>

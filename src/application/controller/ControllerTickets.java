@@ -14,15 +14,36 @@ public class ControllerTickets {
     public ComboBox ticketStati;
     public ComboBox ticketPriority;
 
+    private Ticket ticket;
+
     public void setTicket(Ticket t) {
         titlefield.setText(t.name);
         commentarea.setText(t.desc);
-
-        ticketStati.getSelectionModel().select(t.status);
         ticketStati.setItems(Status.loadFile("stati.csv"));
+        //ticketPriority.setItems(Priority.readDocument("priorities.csv"););
 
-        ticketPriority.getSelectionModel().select(t.priority);
+        for (Status s : ticketStati.getItems()){
+            if(s.nummer == t.status.nummer){
+                ticketStati.getSelectionModel().select(s);
+                break;
+            }
+        }
 
+
+
+        ticketPriority.getSelectionModel().select(t.priority.priority);
+
+    }
+
+    public Ticket getTicket(){
+        /**
+         * aktualisieren der Ticket -Daten
+         */
+
+        ticket.name = titlefield.getText();
+        //.....
+
+        return ticket;
     }
 
     public void sendComment(ActionEvent actionEvent) {

@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -29,15 +30,24 @@ public class Controller {
     /**
      * Filter müssen UND - Verknüpft werden!
      */
+    ObservableList<Ticket> liste = FXCollections.observableArrayList();
+
     public TextField filterNameTextField; // filtern nach name des Todos
+    ObservableList<Ticket> searchNameList = FXCollections.observableArrayList();
+
     public ComboBox<Status> filterStatusComboBox; // filtern nach Status
+    ObservableList<Ticket> searchStatiList = FXCollections.observableArrayList();
+
     public ComboBox<Priority> filterPriorityComboBox; // filtern nach Priorität
+
+    private ControllerTickets active = null;
 
 
     public void initialize() {
 
         filterStatusComboBox.setItems(Status.loadFile("stati.csv"));
         ticketListView.setItems(Ticket.loadFile("tickets.csv"));
+        liste = Ticket.loadFile("tickets.csv");
     }
 
     public void editStartiClicked(ActionEvent actionEvent) {
@@ -66,8 +76,62 @@ public class Controller {
         Parent root = loader.loadFXML("view/tickets.fxml");
         contentPain.getChildren().add(root);
 
-        ControllerTickets controller = (ControllerTickets) loader.getController();
-        controller.setTicket(ticketListView.getSelectionModel().getSelectedItem());
+        active = (ControllerTickets) loader.getController();
+        active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
 
+    }
+
+    public void searchReleased(KeyEvent keyEvent) {
+        String searched = filterNameTextField.getText();
+
+        searchNameList.clear();
+
+        for(Ticket t : liste){
+            if(t.name.contains(searched) || Integer.toString(t.id).contains(searched)){
+                searchNameList.add(t);
+            }
+        }
+
+        ticketListView.setItems(searchNameList);
+    }
+
+    public void statiSearch(MouseEvent mouseEvent) {
+        int searched = filterStatusComboBox.getSelectionModel().getSelectedItem().nummer;
+
+        searchStatiList.clear();
+
+        for(Ticket t : liste){
+            if(t.id == searched){
+                searchStatiList.add(t);
+            }
+        }
+
+        ticketListView.setItems(searchStatiList);
+    }
+
+    public void saveClicked(ActionEvent actionEvent) {
+        //Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste
+        //Datei aktualisieren
+    }
+
+    public void newClicked(ActionEvent actionEvent) {
+        MyFXMLLoader loader = new MyFXMLLoader();
+        Parent root = loader.loadFXML("view/ticket.fxml");
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        contentPain.getChildren().add(root);
+
+        active = (ControllerTickets) loader.getController();
+        active.setTicket(null);
+    }
+
+    public void delClicked(ActionEvent actionEvent) {
+        /**
+         * laden des Tickets
+         * Entfernen aus Listview
+         * Datei aktualisieren
+         */
     }
 }
