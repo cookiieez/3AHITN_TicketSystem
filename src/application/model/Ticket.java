@@ -6,11 +6,11 @@ import javafx.collections.ObservableList;
 import java.io.*;
 
 public class Ticket {
-    public int id = 0;
+    public int id = num;
     public String name = "";
     public String desc = "";
-    public Status status = null;
-    public Priority priority = null;
+    public Status status = new Status();
+    public Priority priority = new Priority();
 
     private static int num = 0;
 

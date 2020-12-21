@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -83,8 +84,8 @@ public class Controller {
 
         searchNameList.clear();
 
-        for(Ticket t : liste){
-            if(t.name.contains(searched) || Integer.toString(t.id).contains(searched)){
+        for (Ticket t : liste) {
+            if (t.name.contains(searched) || Integer.toString(t.id).contains(searched)) {
                 searchNameList.add(t);
             }
         }
@@ -97,8 +98,8 @@ public class Controller {
 
         searchStatiList.clear();
 
-        for(Ticket t : liste){
-            if(t.id == searched){
+        for (Ticket t : liste) {
+            if (t.id == searched) {
                 searchStatiList.add(t);
             }
         }
@@ -111,8 +112,8 @@ public class Controller {
 
         searchPrioList.clear();
 
-        for(Ticket t : liste){
-            if(t.id == searched){
+        for (Ticket t : liste) {
+            if (t.id == searched) {
                 searchPrioList.add(t);
             }
         }
@@ -136,15 +137,18 @@ public class Controller {
 
     public void newClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        Parent root = loader.loadFXML("view/ticket.fxml");
+        Parent root = loader.loadFXML("view/tickets.fxml");
         AnchorPane.setBottomAnchor(root, 0.0);
         AnchorPane.setTopAnchor(root, 0.0);
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         contentPain.getChildren().add(root);
 
+        Ticket t = new Ticket();
         active = (ControllerTickets) loader.getController();
-        active.setTicket(null);
+
+        active.setTicket(t);
+
         selcetedItem = null;
     }
 
@@ -154,7 +158,12 @@ public class Controller {
          * Entfernen aus Listview
          * Datei aktualisieren
          */
+        Ticket delTicket = active.getTicket();
+        liste.remove(delTicket);
 
+        ticketListView.refresh();
+
+        Ticket.writeFile("tickets.csv", liste);
 
     }
 

@@ -6,13 +6,13 @@ import javafx.collections.ObservableList;
 import java.io.*;
 
 public class Priority {
-    public String priority = "0";
-    public String desc;
+    public String priority = "";
+    public String desc = "";
 
 
     @Override
     public String toString() {
-        return priority + ": " + desc;
+        return priority + "-" + desc;
     }
 
     public static ObservableList<Priority> loadFile(String filename) {
