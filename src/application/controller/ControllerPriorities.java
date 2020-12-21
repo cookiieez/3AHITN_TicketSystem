@@ -23,6 +23,22 @@ public class ControllerPriorities extends Priority{
     }
 
     public void saveEntry(ActionEvent actionEvent) {
+        if(selectedItem != null){
+            selectedItem.priority = descvalue.getText();
+
+            PrioView.refresh();
+
+            PrioView.setItems(liste);
+        } else {
+            if(!descvalue.getText().isEmpty()){
+                Priority p = new Priority();
+
+                p.priority = priovalue.getText();
+                p.desc = descvalue.getText();
+                liste.add(p);
+            }
+        }
+        Priority.writeFile("priorities.csv", liste);
     }
 
     public void newEntry(ActionEvent actionEvent) {
