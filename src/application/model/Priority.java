@@ -43,7 +43,6 @@ public class Priority {
     }
 
     public static void writeFile(String filename, ObservableList<Priority> liste) {
-
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("priorities.csv"));
             try {
