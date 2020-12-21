@@ -9,8 +9,8 @@ public class Ticket {
     public int id = 0;
     public String name = "";
     public String desc = "";
-    public Status status;
-    public Priority priority;
+    public Status status = null;
+    public Priority priority = null;
 
     private static int num = 0;
 

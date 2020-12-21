@@ -24,7 +24,7 @@ public class ControllerTickets {
         titlefield.setText(t.name);
         commentarea.setText(t.desc);
         ticketStati.setItems(Status.loadFile("stati.csv"));
-        //ticketPriority.setItems(Priority.readDocument("priorities.csv"););
+        ticketPriority.setItems(Priority.loadFile("priorities.csv"));
 
         for (Status s : ticketStati.getItems()) {
             if (s.nummer == t.status.nummer) {
@@ -53,7 +53,7 @@ public class ControllerTickets {
         ticket.status = ticketStati.getValue();
         ticket.priority = ticketPriority.getValue();
         ticket.id = Ticket.getNum();
-        //.....
+
 
         return ticket;
     }
