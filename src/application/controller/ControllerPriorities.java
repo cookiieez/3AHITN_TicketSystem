@@ -20,20 +20,21 @@ public class ControllerPriorities extends Priority{
     }
 
     public void saveEntry(ActionEvent actionEvent) {
-            if(!priovalue.getText().isEmpty() &&!descvalue.getText().isEmpty()){
+            if(selectedItem == null){
+                Priority p = new Priority();
+
+                p.desc = descvalue.getText();
+                p.priority = priovalue.getText();
+
+                PrioView.getItems().add(p);
+
+                Priority.writeFile("priorities.csv", PrioView.getItems());
+                PrioView.refresh();
+            } else {
                 selectedItem.desc = descvalue.getText();
                 selectedItem.priority = priovalue.getText();
 
                 PrioView.refresh();
-
-                PrioView.setItems(PrioView.getItems());
-            } else {
-                Priority p = new Priority();
-
-                p.priority = priovalue.getText();
-                p.desc = descvalue.getText();
-
-                PrioView.getItems().add(p);
 
                 Priority.writeFile("priorities.csv", PrioView.getItems());
                 PrioView.refresh();
@@ -44,6 +45,7 @@ public class ControllerPriorities extends Priority{
     public void newEntry(ActionEvent actionEvent) {
         descvalue.clear();
         priovalue.clear();
+        selectedItem = null;
     }
 
     public void delEntry(ActionEvent actionEvent) {
