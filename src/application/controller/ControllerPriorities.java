@@ -1,8 +1,6 @@
 package application.controller;
 
 import application.model.Priority;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -14,7 +12,6 @@ public class ControllerPriorities extends Priority{
     public TextField priovalue;
     public TextField descvalue;
     public ListView<Priority> PrioView;
-    ObservableList<Priority> liste = FXCollections.observableArrayList();
     public Button closebutton;
     public Priority selectedItem;
 
@@ -23,28 +20,37 @@ public class ControllerPriorities extends Priority{
     }
 
     public void saveEntry(ActionEvent actionEvent) {
-        if(selectedItem != null){
-            selectedItem.priority = descvalue.getText();
+            if(!priovalue.getText().isEmpty() &&!descvalue.getText().isEmpty()){
+                selectedItem.desc = descvalue.getText();
+                selectedItem.priority = priovalue.getText();
 
-            PrioView.refresh();
+                PrioView.refresh();
 
-            PrioView.setItems(liste);
-        } else {
-            if(!descvalue.getText().isEmpty()){
+                PrioView.setItems(PrioView.getItems());
+            } else {
                 Priority p = new Priority();
 
                 p.priority = priovalue.getText();
                 p.desc = descvalue.getText();
-                liste.add(p);
+
+                PrioView.getItems().add(p);
+
+                Priority.writeFile("priorities.csv", PrioView.getItems());
+                PrioView.refresh();
             }
-        }
-        Priority.writeFile("priorities.csv", liste);
     }
 
+
     public void newEntry(ActionEvent actionEvent) {
+        descvalue.clear();
+        priovalue.clear();
     }
 
     public void delEntry(ActionEvent actionEvent) {
+        descvalue.clear();
+        priovalue.clear();
+        PrioView.getItems().remove(selectedItem);
+        Priority.writeFile("priorities.csv", PrioView.getItems());
     }
 
     public void windowClose(ActionEvent actionEvent) {
