@@ -31,7 +31,7 @@ public class Controller {
     ObservableList<Ticket> searchStatiList = FXCollections.observableArrayList();
 
     public ComboBox<Priority> filterPriorityComboBox; // filtern nach Priorität
-    ObservableList<Priority> searchPrioList = FXCollections.observableArrayList();
+    ObservableList<Ticket> searchPrioList = FXCollections.observableArrayList();
 
     private ControllerTickets active = null;
 
@@ -106,7 +106,19 @@ public class Controller {
         ticketListView.setItems(searchStatiList);
     }
 
+    public void prioSearch(ActionEvent actionEvent) {
+        int searched = Integer.parseInt(filterPriorityComboBox.getSelectionModel().getSelectedItem().priority);
 
+        searchPrioList.clear();
+
+        for(Ticket t : liste){
+            if(t.id == searched){
+                searchPrioList.add(t);
+            }
+        }
+
+        ticketListView.setItems(searchPrioList);
+    }
 
     public void saveClicked(ActionEvent actionEvent) {
         //Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste
@@ -144,17 +156,5 @@ public class Controller {
          */
     }
 
-    public void prioSearch(ActionEvent actionEvent) {
-        int searched = Integer.parseInt(filterPriorityComboBox.getSelectionModel().getSelectedItem().priority);
 
-        searchPrioList.clear();
-
-        for(Ticket t : liste){
-            if(t.id == searched){
-                searchPrioList.add(t);
-            }
-        }
-
-        ticketListView.setItems(searchPrioList);
-    }
 }
