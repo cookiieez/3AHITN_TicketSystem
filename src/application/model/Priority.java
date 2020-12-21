@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.io.*;
 
 public class Priority {
-    public String priority;
+    public String priority = "";
     public String desc;
 
 

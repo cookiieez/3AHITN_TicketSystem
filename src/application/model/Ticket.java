@@ -42,8 +42,8 @@ public class Ticket {
 
                     Priority p = new Priority();
                     p.priority = split[4];
-
                     t.priority = p;
+
                     num++;
 
                     result.add(t);
@@ -61,11 +61,11 @@ public class Ticket {
     public static void writeFile(String filename, ObservableList<Ticket> liste) {
 
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("tickets.csv"));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filename));
             try {
 
                 for (Ticket t : liste) {
-                    bw.write(t.id + ";" + t.name + ";" + t.desc + ";" + t.status + ";" + t.priority + "\n");
+                    bw.write(t.id + ";" + t.name + ";" + t.desc + ";" + t.status.nummer + ";" + t.priority.priority + "\n");
                 }
 
                 bw.flush();
@@ -76,5 +76,13 @@ public class Ticket {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int getNum() {
+        return num;
+    }
+
+    public static void setNum(int num) {
+        Ticket.num = num;
     }
 }

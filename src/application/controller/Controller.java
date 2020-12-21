@@ -41,7 +41,7 @@ public class Controller {
 
         filterStatusComboBox.setItems(Status.loadFile("stati.csv"));
         ticketListView.setItems(Ticket.loadFile("tickets.csv"));
-        liste = Ticket.loadFile("tickets.csv");
+        liste = ticketListView.getItems();
     }
 
     public void editStartiClicked(ActionEvent actionEvent) {
@@ -108,13 +108,15 @@ public class Controller {
     public void saveClicked(ActionEvent actionEvent) {
         //Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste
         //Datei aktualisieren
+        Ticket newTicket = active.getTicket();
 
-        if(selcetedItem != null){
-            active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
-
-            ticketListView.refresh();
-            ticketListView.setItems(liste);
+        if (selcetedItem == null) {
+            liste.add(newTicket);
         }
+
+        ticketListView.refresh();
+
+        Ticket.writeFile("tickets.csv", liste);
     }
 
     public void newClicked(ActionEvent actionEvent) {
@@ -128,6 +130,7 @@ public class Controller {
 
         active = (ControllerTickets) loader.getController();
         active.setTicket(null);
+        selcetedItem = null;
     }
 
     public void delClicked(ActionEvent actionEvent) {
