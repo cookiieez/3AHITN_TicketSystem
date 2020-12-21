@@ -1,44 +1,64 @@
 package application.model;
 
-import javafx.scene.control.ListView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Priority {
     public String priority;
     public String desc;
+
 
     @Override
     public String toString() {
         return priority + ": " + desc;
     }
 
-    public static void readDocument(ListView<Priority> Listview) {
+    public static ObservableList<Priority> loadFile(String filename) {
+        ObservableList<Priority> result = FXCollections.observableArrayList();
+        String zeile = "";
+        int num = 0;
 
-        String s;
-        BufferedReader br = null;
         try {
-            br = new BufferedReader(new FileReader("priorities.csv"));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
             try {
-                while ((s = br.readLine()) != null) {
-                    s = s.replace("\"", "");
-                    String[] words = s.split(";");
+                while ((zeile = br.readLine()) != null) {
+                    String[] split = zeile.split(";");
+                    Priority p = new Priority();
+                    p.priority = split[0];
+                    p.desc = split[1];
 
-                    Priority a = new Priority();
-                    a.priority = words[0];
-                    a.desc = words[1];
-                    Listview.getItems().add(a);
+                    result.add(p);
+                    num++;
+
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } finally {
+                br.close();
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+        return result;
+    }
+
+    public static void writeFile(String filename, ObservableList<Priority> liste) {
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("priorities.csv"));
+            try {
+
+                for (Priority p : liste) {
+                    bw.write(p.priority + ";" + p.desc + "\n");
+                }
+
+                bw.flush();
+            } finally {
+                bw.close();
+            }
+
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }

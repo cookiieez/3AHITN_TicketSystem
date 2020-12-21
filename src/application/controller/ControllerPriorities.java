@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.model.Priority;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -12,11 +14,12 @@ public class ControllerPriorities extends Priority{
     public TextField priovalue;
     public TextField descvalue;
     public ListView<Priority> PrioView;
+    ObservableList<Priority> liste = FXCollections.observableArrayList();
     public Button closebutton;
     public Priority selectedItem;
 
     public void initialize() {
-        readDocument(PrioView);
+        PrioView.setItems(Priority.loadFile("priorities.csv"));
     }
 
     public void saveEntry(ActionEvent actionEvent) {
