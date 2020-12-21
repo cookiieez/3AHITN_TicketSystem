@@ -41,6 +41,7 @@ public class Controller {
     public void initialize() {
 
         filterStatusComboBox.setItems(Status.loadFile("stati.csv"));
+        filterPriorityComboBox.setItems(Priority.loadFile("priorities.csv"));
         ticketListView.setItems(Ticket.loadFile("tickets.csv"));
         liste = ticketListView.getItems();
     }
