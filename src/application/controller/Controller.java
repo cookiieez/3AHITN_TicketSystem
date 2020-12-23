@@ -44,11 +44,12 @@ public class Controller {
     public void initialize() {
         Status s = new Status();
         s.status = "Filter wählen";
+        s.nummer = -1;
         filterStatusComboBox.getItems().add(s);
         filterStatusComboBox.getItems().addAll(Status.loadFile("stati.csv"));
 
         Priority p = new Priority();
-        p.priority = "0";
+        p.priority = "-1";
         p.desc = "Filter wählen";
         filterPriorityComboBox.getItems().addAll(p);
         filterPriorityComboBox.getItems().addAll(Priority.loadFile("priorities.csv"));
@@ -155,26 +156,18 @@ public class Controller {
     }
 
     private void filter() {
-        ObservableList<Ticket> filteredList = FXCollections.observableList(backup);
+        ObservableList<Ticket> filteredList = FXCollections.observableArrayList(backup);
 
         if (filterNameTextField.getText().length() > 0) {
             filteredList.removeIf(t -> !t.name.toLowerCase().contains(filterNameTextField.getText().toLowerCase()));
         }
 
-        if (filterPriorityComboBox.getValue() != null) {
-            if (!filterPriorityComboBox.getValue().desc.equals("Filter wählen")) {
-                filteredList.removeIf(t -> !t.priority.priority.equals(filterPriorityComboBox.getValue().priority));
-            } else {
-
-            }
+        if (filterPriorityComboBox.getValue() != null && !filterPriorityComboBox.getValue().priority.equals("-1")) {
+            filteredList.removeIf(t -> !t.priority.priority.equals(filterPriorityComboBox.getValue().priority));
         }
 
-        if (filterStatusComboBox.getValue() != null) {
-            if (!filterStatusComboBox.getValue().status.equals("Filter wählen")) {
-                backup.removeIf(t -> t.status.nummer != filterStatusComboBox.getValue().nummer);
-            } else {
-
-            }
+        if (filterStatusComboBox.getValue() != null && filterStatusComboBox.getValue().nummer != -1) {
+            filteredList.removeIf(t -> t.status.nummer != filterStatusComboBox.getValue().nummer);
         }
 
         ticketListView.setItems(filteredList);
