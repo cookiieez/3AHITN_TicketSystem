@@ -56,6 +56,7 @@ public class ControllerDepartments {
         depField.clear();
         depList.getItems().remove(selectedItem);
         Departments.writeFile("departments.csv", depList.getItems());
+        selectedItem = null;
     }
 
     public void neuClicked(ActionEvent actionEvent) {
