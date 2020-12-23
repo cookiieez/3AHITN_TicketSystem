@@ -1,7 +1,6 @@
 package application.controller;
 
 import application.model.Departments;
-import application.model.Status;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,8 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
-import java.io.*;
 
 public class ControllerDepartments {
     public TextField depField;
@@ -35,31 +32,30 @@ public class ControllerDepartments {
     }
 
     public void speichernClicked(ActionEvent actionEvent) {
-        if(selectedItem != null){
+        if(selectedItem == null){
+            Departments d = new Departments();
+
+            d.department = depField.getText();
+
+            depList.getItems().add(d);
+
+            Departments.writeFile("departments.csv", depList.getItems());
+            depList.refresh();
+        } else {
             selectedItem.department = depField.getText();
 
             depList.refresh();
 
-            depList.setItems(liste);
-        } else {
-            if(!depField.getText().isEmpty()){
-                Departments d = new Departments();
-
-                d.department = depField.getText();
-                d.nummer = num + 1;
-
-                liste.add(d);
-            }
-            num++;
+            Departments.writeFile("departments.csv", depList.getItems());
+            depList.refresh();
         }
-        Departments.writeFile("departments.csv", liste);
     }
 
     public void löschenClicked(ActionEvent actionEvent) {
-        depField.clear();
         num--;
-        liste.remove(selectedItem);
-        Departments.writeFile("departments.csv", liste);
+        depField.clear();
+        depList.getItems().remove(selectedItem);
+        Departments.writeFile("departments.csv", depList.getItems());
     }
 
     public void neuClicked(ActionEvent actionEvent) {
