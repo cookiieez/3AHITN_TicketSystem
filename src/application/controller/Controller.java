@@ -165,7 +165,7 @@ public class Controller {
             if (!filterPriorityComboBox.getValue().desc.equals("Filter wählen")) {
                 filteredList.removeIf(t -> !t.priority.priority.equals(filterPriorityComboBox.getValue().priority));
             } else {
-                filterPriorityComboBox.;
+
             }
         }
 
