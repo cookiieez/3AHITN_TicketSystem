@@ -15,6 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.ArrayList;
+
 public class Controller {
     public ListView<Ticket> ticketListView;
     public AnchorPane contentPain;
@@ -37,12 +39,24 @@ public class Controller {
 
     Ticket selcetedItem = null;
 
+    ArrayList<Ticket> backup;
 
     public void initialize() {
+        Status s = new Status();
+        s.status = "Filter wählen";
+        filterStatusComboBox.getItems().add(s);
+        filterStatusComboBox.getItems().addAll(Status.loadFile("stati.csv"));
 
-        filterStatusComboBox.setItems(Status.loadFile("stati.csv"));
+        Priority p = new Priority();
+        p.priority = "0";
+        p.desc = "Filter wählen";
+        filterPriorityComboBox.getItems().addAll(p);
+        filterPriorityComboBox.getItems().addAll(Priority.loadFile("priorities.csv"));
+
         ticketListView.setItems(Ticket.loadFile("tickets.csv"));
         liste = ticketListView.getItems();
+
+        backup = new ArrayList<>(liste);
     }
 
     public void editStartiClicked(ActionEvent actionEvent) {
@@ -79,31 +93,11 @@ public class Controller {
     }
 
     public void searchReleased(KeyEvent keyEvent) {
-        String searched = filterNameTextField.getText();
-
-        searchNameList.clear();
-
-        for (Ticket t : liste) {
-            if (t.name.contains(searched) || Integer.toString(t.id).contains(searched)) {
-                searchNameList.add(t);
-            }
-        }
-
-        ticketListView.setItems(searchNameList);
+        filter();
     }
 
     public void statiSearch(ActionEvent mouseEvent) {
-        int searched = filterStatusComboBox.getSelectionModel().getSelectedItem().nummer;
-
-        searchStatiList.clear();
-
-        for (Ticket t : liste) {
-            if (t.id == searched) {
-                searchStatiList.add(t);
-            }
-        }
-
-        ticketListView.setItems(searchStatiList);
+        filter();
     }
 
 
@@ -130,6 +124,8 @@ public class Controller {
         AnchorPane.setRightAnchor(root, 0.0);
         contentPain.getChildren().add(root);
 
+        Ticket.setNum(Ticket.getNum() + 1);
+
         Ticket t = new Ticket();
         active = (ControllerTickets) loader.getController();
 
@@ -155,15 +151,32 @@ public class Controller {
 
 
     public void prioSearch(ActionEvent actionEvent) {
-        String searched = filterPriorityComboBox.getSelectionModel().getSelectedItem().priority;
-        searchPrioList.clear();
+        filter();
+    }
 
-        for (Ticket t : liste) {
-            if (t.id == Integer.parseInt(searched)) {
-                searchPrioList.add(t);
+    private void filter() {
+        ObservableList<Ticket> filteredList = FXCollections.observableList(backup);
+
+        if (filterNameTextField.getText().length() > 0) {
+            filteredList.removeIf(t -> !t.name.toLowerCase().contains(filterNameTextField.getText().toLowerCase()));
+        }
+
+        if (filterPriorityComboBox.getValue() != null) {
+            if (!filterPriorityComboBox.getValue().desc.equals("Filter wählen")) {
+                filteredList.removeIf(t -> !t.priority.priority.equals(filterPriorityComboBox.getValue().priority));
+            } else {
+                filterPriorityComboBox.;
             }
         }
 
-        ticketListView.setItems(searchPrioList);
+        if (filterStatusComboBox.getValue() != null) {
+            if (!filterStatusComboBox.getValue().status.equals("Filter wählen")) {
+                backup.removeIf(t -> t.status.nummer != filterStatusComboBox.getValue().nummer);
+            } else {
+
+            }
+        }
+
+        ticketListView.setItems(filteredList);
     }
 }
