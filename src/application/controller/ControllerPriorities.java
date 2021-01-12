@@ -16,7 +16,7 @@ public class ControllerPriorities extends Priority{
     public Priority selectedItem;
 
     public void initialize() {
-        PrioView.setItems(Priority.loadFile("priorities.csv"));
+        PrioView.setItems(Priority.loadList());
     }
 
     public void saveEntry(ActionEvent actionEvent) {

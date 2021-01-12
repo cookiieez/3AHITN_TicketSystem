@@ -52,7 +52,7 @@ public class Controller {
         p.priority = "-1";
         p.desc = "Filter wählen";
         filterPriorityComboBox.getItems().addAll(p);
-        filterPriorityComboBox.getItems().addAll(Priority.loadFile("priorities.csv"));
+        filterPriorityComboBox.getItems().addAll(Priority.loadList());
 
         ticketListView.setItems(Ticket.loadFile("tickets.csv"));
         liste = ticketListView.getItems();
@@ -124,8 +124,6 @@ public class Controller {
         AnchorPane.setLeftAnchor(root, 0.0);
         AnchorPane.setRightAnchor(root, 0.0);
         contentPain.getChildren().add(root);
-
-        Ticket.setNum(Ticket.getNum() + 1);
 
         Ticket t = new Ticket();
         active = (ControllerTickets) loader.getController();

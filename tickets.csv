@@ -1,5 +1,5 @@
 1;Fehlerbehebung Bezahlvorgang;Beim Abschließen einer Bestellung kommt es zu einer Nullpointer-Exception.;1;4
-6;Fertigstellen ToDo-System123;Es soll jedes ToDo auf der rechten Seite angezeigt werden;2;3
-3;ToDo 3;Beschreibung 1;1;4
+2;Fertigstellen ToDo-System123;Es soll jedes ToDo auf der rechten Seite angezeigt werden;2;3
+5;ToDo 3;Beschreibung 2;1;4
 5;ToDo 5;Beschreibung 3;3;1
-6;ToDo 6;Beschreibung 4;4;4
+5;ToDo 6;Beschreibung 4;4;4
