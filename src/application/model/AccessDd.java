@@ -23,7 +23,7 @@ public class AccessDd {
         if(connection == null){
             try{
                 // erzeuge neue Verbinung zur Datenbank
-                connection = DriverManager.getConnection("jdbc:ucanaccess://db/Ticket_Verwaltung.accdb");
+                connection = DriverManager.getConnection("jdbc:ucanaccess://db/Ticketsystem_Verwaltung.accdb");
             } catch (SQLException throwables){
 
             }
