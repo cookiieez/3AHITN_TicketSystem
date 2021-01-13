@@ -2,9 +2,14 @@ package application.model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.input.MouseEvent;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Status {
 
@@ -19,34 +24,26 @@ public class Status {
 
 
     public static ObservableList<Status> loadFile(String filename) {
-        ObservableList<Status> result = FXCollections.observableArrayList();
-        String zeile = null;
-        BufferedReader br = null;
-
+        ObservableList<Status> list = FXCollections.observableArrayList();
 
         try {
-            br = new BufferedReader(new FileReader(filename));
+            Connection connection = AccessDd.getConnection();
 
-            try {
-                while ((zeile = br.readLine()) != null) {
-                    String[] split = zeile.split(";");
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM stati");
 
-                    Status s = new Status();
-                    s.nummer = Integer.parseInt(split[0]);
-                    s.status = split[1];
-
-                    result.add(s);
-                    num++;
-
-                }
-            } finally {
-                br.close();
+            while (result.next()) {
+                Status s = new Status();
+                s.nummer = result.getInt("status_id");
+                s.status = result.getString("name");
+                list.add(s);
             }
-        } catch (IOException io) {
-            io.printStackTrace();
+        } catch (SQLException throwables) {
+
         }
-        return result;
-    }
+        return list;
+}
 
     public static void writeFile(String filename, ObservableList<Status> liste) {
 
