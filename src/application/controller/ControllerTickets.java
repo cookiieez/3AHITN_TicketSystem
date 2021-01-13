@@ -23,7 +23,7 @@ public class ControllerTickets {
 
         titlefield.setText(t.name);
         commentarea.setText(t.desc);
-        ticketStati.setItems(Status.loadFile("stati.csv"));
+        ticketStati.setItems(Status.loadFile());
         ticketPriority.setItems(Priority.loadList());
 
         for (Status s : ticketStati.getItems()) {

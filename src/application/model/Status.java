@@ -23,7 +23,7 @@ public class Status {
     }
 
 
-    public static ObservableList<Status> loadFile(String filename) {
+    public static ObservableList<Status> loadFile() {
         ObservableList<Status> list = FXCollections.observableArrayList();
 
         try {

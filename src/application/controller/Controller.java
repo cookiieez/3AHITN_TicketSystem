@@ -46,7 +46,7 @@ public class Controller {
         s.status = "Filter wählen";
         s.nummer = -1;
         filterStatusComboBox.getItems().add(s);
-        filterStatusComboBox.getItems().addAll(Status.loadFile("stati.csv"));
+        filterStatusComboBox.getItems().addAll(Status.loadFile());
 
         Priority p = new Priority();
         p.priority = "-1";
