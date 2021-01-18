@@ -3,7 +3,14 @@ package application.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class User {
     public String abtnumemr = "";
@@ -20,36 +27,33 @@ public class User {
     }
 
     public static ObservableList<User> loadFile(String filename) {
-        ObservableList<User> result = FXCollections.observableArrayList();
+        ObservableList<User> list = FXCollections.observableArrayList();
         String zeile = null;
         BufferedReader br = null;
 
 
         try {
-            br = new BufferedReader(new FileReader(filename));
+            Connection connection = AccessDd.getConnection();
 
-            try {
-                while ((zeile = br.readLine()) != null) {
-                    String[] split = zeile.split(";");
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM user");
 
-                    User u = new User();
-                    u.title = split[1];
-                    u.name = split[2];
-                    u.zip = split[3];
-                    u.street = split[4];
-                    u.city = split[5];
+            while (result.next()) {
+                User u = new User();
+                u.name = result.getString("name");
+                u.abtnumemr = result.getString("department_id");
+                u.city = result.getString("city");
+                u.street = result.getString("street");
+                u.title = result.getString("title");
+                u.zip = result.getString("zip");
 
-                    result.add(u);
-                    num++;
-
-                }
-            } finally {
-                br.close();
+                list.add(u);
             }
-        } catch (IOException io) {
-            io.printStackTrace();
+        } catch (SQLException throwables) {
+
         }
-        return result;
+        return list;
     }
 
     public static void writeFile(String filename, ObservableList<User> liste) {

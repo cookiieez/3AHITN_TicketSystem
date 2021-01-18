@@ -3,7 +3,14 @@ package application.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Ticket {
     public int id = num;
@@ -19,43 +26,31 @@ public class Ticket {
     }
 
     public static ObservableList<Ticket> loadFile(String filename) {
-        ObservableList<Ticket> result = FXCollections.observableArrayList();
+        ObservableList<Ticket> list = FXCollections.observableArrayList();
         String zeile = null;
         BufferedReader br = null;
 
 
         try {
-            br = new BufferedReader(new FileReader(filename));
+            Connection connection = AccessDd.getConnection();
 
-            try {
-                while ((zeile = br.readLine()) != null) {
-                    String[] split = zeile.split(";");
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM tickets");
 
-                    Ticket t = new Ticket();
-                    t.id = Integer.parseInt(split[0]);
-                    t.name = split[1];
-                    t.desc = split[2];
-
-                    Status s = new Status();
-                    s.nummer = Integer.parseInt(split[3]);
-                    t.status = s;
-
-                    Priority p = new Priority();
-                    p.priority = split[4];
-                    t.priority = p;
-
-                    num++;
-
-                    result.add(t);
-
-                }
-            } finally {
-                br.close();
+            while (result.next()) {
+                Ticket t = new Ticket();
+                t.desc = result.getString("desc");
+                t.id = result.getInt("ticket_id");
+                t.name = result.getString("name");
+                t.priority.priority = result.getString("priority_id");
+                t.status.nummer = result.getInt("status_id");
+                list.add(t);
             }
-        } catch (IOException io) {
-            io.printStackTrace();
+        } catch (SQLException throwables) {
+
         }
-        return result;
+        return list;
     }
 
     public static void writeFile(String filename, ObservableList<Ticket> liste) {
