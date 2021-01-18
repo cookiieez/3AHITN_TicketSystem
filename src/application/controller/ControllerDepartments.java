@@ -21,7 +21,7 @@ public class ControllerDepartments {
     private Departments selectedItem = null;
 
     public void initialize() {
-        depList.setItems(Departments.loadFile("departments.csv"));
+        depList.setItems(Departments.loadList());
     }
 
 
