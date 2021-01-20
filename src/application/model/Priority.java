@@ -3,11 +3,10 @@ package application.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.*;
 
 public class Priority {
     public String priority = "";
@@ -41,32 +40,33 @@ public class Priority {
         return list;
     }
 
-    public static ObservableList<Priority> loadFile(String filename) {
-        ObservableList<Priority> result = FXCollections.observableArrayList();
-        String zeile = "";
-        int num = 0;
+    public void delete(){
+        try{
+            Connection connection = AccessDd.getConnection();
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(filename));
-            try {
-                while ((zeile = br.readLine()) != null) {
-                    String[] split = zeile.split(";");
-                    Priority p = new Priority();
-                    p.priority = split[0];
-                    p.desc = split[1];
+            Statement statement = null;
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM priorities WHERE priority_id =" + priority);
 
-                    result.add(p);
-                    num++;
-
-                }
-            } finally {
-                br.close();
-            }
-        } catch (IOException io) {
-            io.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return result;
     }
+
+    public void update(){
+        try{
+            Connection connection = AccessDd.getConnection();
+
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("UPDATE priorities SET name = ? where priority_id = ?");
+            statement.setString(1, desc);
+            statement.setString(2, priority);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
     public static void writeFile(String filename, ObservableList<Priority> liste) {
         try {

@@ -28,7 +28,6 @@ public class ControllerPriorities extends Priority{
 
                 PrioView.getItems().add(p);
 
-                Priority.writeFile("priorities.csv", PrioView.getItems());
                 PrioView.refresh();
             } else {
                 selectedItem.desc = descvalue.getText();
@@ -36,7 +35,7 @@ public class ControllerPriorities extends Priority{
 
                 PrioView.refresh();
 
-                Priority.writeFile("priorities.csv", PrioView.getItems());
+                selectedItem.update();
                 PrioView.refresh();
             }
     }
@@ -52,7 +51,7 @@ public class ControllerPriorities extends Priority{
         descvalue.clear();
         priovalue.clear();
         PrioView.getItems().remove(selectedItem);
-        Priority.writeFile("priorities.csv", PrioView.getItems());
+        selectedItem.delete();
     }
 
     public void windowClose(ActionEvent actionEvent) {
