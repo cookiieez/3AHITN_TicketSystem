@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Departments {
 
@@ -18,6 +15,33 @@ public class Departments {
 
     public String toString() {
         return nummer + "-" + department;
+    }
+
+    public void delete(){
+        try{
+            Connection connection = AccessDd.getConnection();
+
+            Statement statement = null;
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM departments WHERE department_id =" + nummer);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void update(){
+        try{
+            Connection connection = AccessDd.getConnection();
+
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("UPDATE departments SET name = ? where department_id = ?");
+            statement.setString(1, String.valueOf(nummer));
+            statement.setString(2, department);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public static ObservableList<Departments> loadList() {

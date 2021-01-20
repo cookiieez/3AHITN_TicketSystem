@@ -46,7 +46,7 @@ public class ControllerDepartments {
 
             depList.refresh();
 
-            Departments.writeFile("departments.csv", depList.getItems());
+            selectedItem.update();
             depList.refresh();
         }
     }
@@ -55,7 +55,7 @@ public class ControllerDepartments {
         num--;
         depField.clear();
         depList.getItems().remove(selectedItem);
-        Departments.writeFile("departments.csv", depList.getItems());
+        selectedItem.delete();
         selectedItem = null;
     }
 
