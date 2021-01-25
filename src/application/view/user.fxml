@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane prefHeight="305.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ControllerUser">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -21,7 +27,9 @@
                   <TextField fx:id="zipField" layoutX="17.0" layoutY="38.0" prefHeight="26.0" prefWidth="382.0" />
                   <Label layoutX="16.0" layoutY="20.0" text="Zip" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="23.0" />
                   <ComboBox fx:id="departmentIdCombo" layoutX="17.0" layoutY="222.0" prefWidth="150.0" promptText="DepartmentID" />
-                  <Button layoutX="18.0" layoutY="264.0" mnemonicParsing="false" onAction="#sendUser" text="Senden" />
+                  <Button fx:id="saveButton" layoutX="18.0" layoutY="264.0" mnemonicParsing="false" onAction="#saveButtonClicked" text="Save" />
+                  <Button fx:id="delButton" layoutX="66.0" layoutY="264.0" mnemonicParsing="false" onAction="#delButtonClicked" text="Delete" />
+                  <Button fx:id="newButton" layoutX="126.0" layoutY="264.0" mnemonicParsing="false" onAction="#newButtonClicked" text="New" />
                </children>
             </AnchorPane>
         </items>

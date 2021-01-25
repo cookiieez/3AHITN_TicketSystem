@@ -43,7 +43,8 @@ public class ControllerStati {
 
             statiList.refresh();
 
-            statiList.setItems(liste);
+            selectedItem.update();
+            statiList.refresh();
         } else {
             if(!nameField.getText().isEmpty()){
                 Status s = new Status();
@@ -60,9 +61,8 @@ public class ControllerStati {
 
     public void löschenClicked(ActionEvent actionEvent) {
         nameField.clear();
-        num--;
-        liste.remove(selectedItem);
-        Status.writeFile("stati.csv", liste);
+        statiList.getItems().remove(selectedItem);
+        selectedItem.delete();
     }
 
     public void abbrechenClicked(ActionEvent actionEvent) {

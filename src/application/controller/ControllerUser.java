@@ -2,6 +2,7 @@ package application.controller;
 
 import application.model.User;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -16,9 +17,11 @@ public class ControllerUser extends User {
     public ListView<User> userView;
 
     public User selectedItem;
+    public Button saveButton;
+    public Button delButton;
+    public Button newButton;
 
-    public void sendUser(ActionEvent actionEvent) {
-    }
+
     public void initialize(){
         userView.setItems(User.loadFile("users.csv"));
     }
@@ -30,5 +33,32 @@ public class ControllerUser extends User {
         zipField.setText(userView.getSelectionModel().getSelectedItem().zip);
 
         selectedItem = userView.getSelectionModel().getSelectedItem();
+    }
+
+    public void saveButtonClicked(ActionEvent actionEvent) {
+        if(selectedItem != null){
+            selectedItem.name = nameField.getText();
+            selectedItem.title = titleField.getText();
+            selectedItem.street = streetField.getText();
+            selectedItem.zip = zipField.getText();
+
+            userView.refresh();
+
+            selectedItem.update();
+            userView.refresh();
+        }
+    }
+
+    public void delButtonClicked(ActionEvent actionEvent) {
+        titleField.clear();
+        nameField.clear();
+        streetField.clear();
+        zipField.clear();
+
+        userView.getItems().remove(selectedItem);
+        selectedItem.delete();
+    }
+
+    public void newButtonClicked(ActionEvent actionEvent) {
     }
 }

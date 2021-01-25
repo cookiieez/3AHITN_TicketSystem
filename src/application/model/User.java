@@ -7,12 +7,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class User {
+    public int userId;
     public String abtnumemr = "";
     public String title = "";
     public String name = "";
@@ -41,6 +39,7 @@ public class User {
 
             while (result.next()) {
                 User u = new User();
+                u.userId = result.getInt("user_id");
                 u.name = result.getString("name");
                 u.abtnumemr = result.getString("department_id");
                 u.city = result.getString("city");
@@ -54,6 +53,37 @@ public class User {
 
         }
         return list;
+    }
+
+    public void delete(){
+        try{
+            Connection connection = AccessDd.getConnection();
+
+            Statement statement = null;
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM user WHERE user_id =" + userId);
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void update(){
+        try{
+            Connection connection = AccessDd.getConnection();
+
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("UPDATE user SET name = ?, title = ?, street = ?, zip = ?, department_id = ? where user_id = ?");
+            statement.setString(1, name);
+            statement.setString(2, title);
+            statement.setString(3, street);
+            statement.setString(4, zip);
+            statement.setString(5, abtnumemr);
+            statement.setInt(6, userId);
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public static void writeFile(String filename, ObservableList<User> liste) {
