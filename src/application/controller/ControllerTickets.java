@@ -34,7 +34,7 @@ public class ControllerTickets {
         }
 
         for (Priority p : ticketPriority.getItems()) {
-            if (p.priority.equals(t.priority.priority)) {
+            if (p.priority == t.priority.priority) {
                 ticketPriority.getSelectionModel().select(p);
             }
         }

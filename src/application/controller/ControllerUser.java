@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.model.Departments;
 import application.model.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ public class ControllerUser extends User {
     public TextField nameField;
     public TextField streetField;
     public TextField zipField;
-    public ComboBox departmentIdCombo;
+    public ComboBox<Departments> departmentIdCombo;
     public ListView<User> userView;
 
     public User selectedItem;
@@ -24,6 +25,7 @@ public class ControllerUser extends User {
 
     public void initialize(){
         userView.setItems(User.loadFile("users.csv"));
+        departmentIdCombo.setItems(Departments.loadList());
     }
 
     public void userClicked(MouseEvent mouseEvent) {
@@ -31,6 +33,7 @@ public class ControllerUser extends User {
         titleField.setText(userView.getSelectionModel().getSelectedItem().title);
         streetField.setText(userView.getSelectionModel().getSelectedItem().street);
         zipField.setText(userView.getSelectionModel().getSelectedItem().zip);
+        departmentIdCombo.setValue(userView.getSelectionModel().getSelectedItem().department);
 
         selectedItem = userView.getSelectionModel().getSelectedItem();
     }

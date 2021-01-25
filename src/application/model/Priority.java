@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Priority {
-    public String priority = "";
+    public int priority = 0;
     public String desc = "";
 
 
@@ -31,13 +31,33 @@ public class Priority {
             while (result.next()) {
                 Priority p = new Priority();
                 p.desc = result.getString("name");
-                p.priority = result.getString("priority_id");
+                p.priority = result.getInt("priority_id");
                 list.add(p);
             }
         } catch (SQLException throwables) {
 
         }
         return list;
+    }
+
+    public static Priority getById(int id){
+        Priority p = new Priority();
+        try {
+            Connection connection = AccessDd.getConnection();
+
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM priorities WHERE priority_id =" + id);
+
+            if (result.next()) {
+                p.priority = result.getInt("priority_id");
+                p.desc = result.getString("name");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return p;
     }
 
     public void delete(){
@@ -60,7 +80,7 @@ public class Priority {
             PreparedStatement statement = null;
             statement = connection.prepareStatement("UPDATE priorities SET name = ? where priority_id = ?");
             statement.setString(1, desc);
-            statement.setString(2, priority);
+            statement.setInt(2, priority);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

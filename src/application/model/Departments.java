@@ -30,6 +30,26 @@ public class Departments {
         }
     }
 
+    public static Departments getById(int id){
+        Departments p = new Departments();
+        try {
+            Connection connection = AccessDd.getConnection();
+
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM departments WHERE department_id =" + id);
+
+            if (result.next()) {
+                p.department = result.getString("Name");
+                p.nummer = result.getInt("department_id");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return p;
+    }
+
     public void update(){
         try{
             Connection connection = AccessDd.getConnection();

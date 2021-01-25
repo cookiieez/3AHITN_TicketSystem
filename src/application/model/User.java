@@ -11,12 +11,12 @@ import java.sql.*;
 
 public class User {
     public int userId;
-    public String abtnumemr = "";
     public String title = "";
     public String name = "";
     public String street = "";
     public String zip;
     public String city = "";
+    public Departments department;
 
     private static int num = 0;
 
@@ -41,11 +41,11 @@ public class User {
                 User u = new User();
                 u.userId = result.getInt("user_id");
                 u.name = result.getString("name");
-                u.abtnumemr = result.getString("department_id");
                 u.city = result.getString("city");
                 u.street = result.getString("street");
                 u.title = result.getString("title");
                 u.zip = result.getString("zip");
+                u.department = Departments.getById(result.getInt("department_id"));
 
                 list.add(u);
             }
@@ -78,7 +78,7 @@ public class User {
             statement.setString(2, title);
             statement.setString(3, street);
             statement.setString(4, zip);
-            statement.setString(5, abtnumemr);
+            statement.setInt(5, department.nummer);
             statement.setInt(6, userId);
             statement.executeUpdate();
         } catch (SQLException throwables) {
@@ -93,7 +93,7 @@ public class User {
             try {
 
                 for (User u : liste) {
-                    bw.write(i + ";" + u.title + ";" + u.name + ";" + u.street + ";" + u.zip +";" + u.city + ";" + u.abtnumemr + "\n");
+                    bw.write(i + ";" + u.title + ";" + u.name + ";" + u.street + ";" + u.zip +";" + u.city + ";" + u.department.nummer + "\n");
                     i++;
                 }
 

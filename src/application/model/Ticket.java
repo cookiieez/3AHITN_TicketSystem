@@ -22,27 +22,32 @@ public class Ticket {
         return  id + "-" + name;
     }
 
-    public static ObservableList<Priority> loadList() {
-        ObservableList<Priority> list = FXCollections.observableArrayList();
+    public static ObservableList<Ticket> loadList() {
+        ObservableList<Ticket> list = FXCollections.observableArrayList();
 
         try {
             Connection connection = AccessDd.getConnection();
 
             Statement statement = null;
             statement = connection.createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM priorities");
+            ResultSet result = statement.executeQuery("SELECT * FROM tickets");
 
             while (result.next()) {
-                Priority p = new Priority();
-                p.desc = result.getString("name");
-                p.priority = result.getString("priority_id");
-                list.add(p);
+                Ticket t = new Ticket();
+                t.id = result.getInt("ticket_id");
+                t.name = result.getString("name");
+                t.desc = result.getString("desc");
+                t.priority = Priority.getById(result.getInt("priority_id"));
+                t.status = Status.getById(result.getInt("status_id"));
+                list.add(t);
             }
         } catch (SQLException throwables) {
 
         }
         return list;
     }
+
+
 
     public void delete(){
         try{
@@ -62,18 +67,19 @@ public class Ticket {
             Connection connection = AccessDd.getConnection();
 
             PreparedStatement statement = null;
-            statement = connection.prepareStatement("UPDATE tickets SET name = ? where ticket_id = ?");
-            statement.setString(1, String.valueOf(id));
-            statement.setString(2, name);
-            statement.setString(3, desc);
-            statement.setString(4, priority.priority);
+            statement = connection.prepareStatement("UPDATE tickets SET name = ?, desc = ?, priority_id = ?, status_id = ? where ticket_id = ?");
+            statement.setString(1, name);
+            statement.setString(2, desc);
+            statement.setInt(3, priority.priority);
+            statement.setInt(4, status.nummer);
+            statement.setInt(5, id);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
-
+/**
     public static ObservableList<Ticket> loadFile(String filename) {
         ObservableList<Ticket> list = FXCollections.observableArrayList();
         String zeile = null;
@@ -101,6 +107,7 @@ public class Ticket {
         }
         return list;
     }
+ **/
 
     public static void writeFile(String filename, ObservableList<Ticket> liste) {
 

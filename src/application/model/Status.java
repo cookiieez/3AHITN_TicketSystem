@@ -69,6 +69,26 @@ public class Status {
         }
     }
 
+    public static Status getById(int id){
+        Status s = new Status();
+        try {
+            Connection connection = AccessDd.getConnection();
+
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM stati WHERE status_id =" + id);
+
+            if (result.next()) {
+                s.nummer = result.getInt("status_id");
+                s.status = result.getString("name");
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return s;
+    }
+
     public static void writeFile(String filename, ObservableList<Status> liste) {
 
         try {

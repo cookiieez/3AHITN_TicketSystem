@@ -24,14 +24,14 @@ public class ControllerPriorities extends Priority{
                 Priority p = new Priority();
 
                 p.desc = descvalue.getText();
-                p.priority = priovalue.getText();
+                p.priority = Integer.parseInt(priovalue.getText());
 
                 PrioView.getItems().add(p);
 
                 PrioView.refresh();
             } else {
                 selectedItem.desc = descvalue.getText();
-                selectedItem.priority = priovalue.getText();
+                selectedItem.priority = Integer.parseInt(priovalue.getText());
 
                 PrioView.refresh();
 
@@ -61,7 +61,7 @@ public class ControllerPriorities extends Priority{
 
     public void priorityClicked(MouseEvent mouseEvent) {
         selectedItem = PrioView.getSelectionModel().getSelectedItem();
-        priovalue.setText(selectedItem.priority);
+        priovalue.setText(Integer.toString(selectedItem.priority));
         descvalue.setText(selectedItem.desc);
     }
 }

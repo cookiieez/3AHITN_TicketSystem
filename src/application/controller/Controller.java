@@ -49,12 +49,12 @@ public class Controller {
         filterStatusComboBox.getItems().addAll(Status.loadFile());
 
         Priority p = new Priority();
-        p.priority = "-1";
+        p.priority = -1;
         p.desc = "Filter wählen";
         filterPriorityComboBox.getItems().addAll(p);
         filterPriorityComboBox.getItems().addAll(Priority.loadList());
 
-        ticketListView.setItems(Ticket.loadFile("tickets.csv"));
+        ticketListView.setItems(Ticket.loadList());
         liste = ticketListView.getItems();
 
         backup = new ArrayList<>(liste);
@@ -160,8 +160,9 @@ public class Controller {
             filteredList.removeIf(t -> !t.name.toLowerCase().contains(filterNameTextField.getText().toLowerCase()));
         }
 
-        if (filterPriorityComboBox.getValue() != null && !filterPriorityComboBox.getValue().priority.equals("-1")) {
-            filteredList.removeIf(t -> !t.priority.priority.equals(filterPriorityComboBox.getValue().priority));
+        if (filterPriorityComboBox.getValue() != null) {
+            filterPriorityComboBox.getValue();
+            filteredList.removeIf(t -> !(t.priority.priority == (filterPriorityComboBox.getValue().priority)));
         }
 
         if (filterStatusComboBox.getValue() != null && filterStatusComboBox.getValue().nummer != -1) {
