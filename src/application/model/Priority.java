@@ -12,6 +12,15 @@ public class Priority {
     public int priority = 0;
     public String desc = "";
 
+    public Priority(int id, String desc){
+        priority = id;
+        this.desc = desc;
+    }
+
+    public Priority(){
+        priority = 0;
+        this.desc = null;
+    }
 
     @Override
     public String toString() {
@@ -29,9 +38,11 @@ public class Priority {
             ResultSet result = statement.executeQuery("SELECT * FROM priorities");
 
             while (result.next()) {
-                Priority p = new Priority();
+                Priority p = new Priority(result.getInt("priority_id"), result.getString("name"));
+                /**
                 p.desc = result.getString("name");
                 p.priority = result.getInt("priority_id");
+                 */
                 list.add(p);
             }
         } catch (SQLException throwables) {
@@ -41,7 +52,7 @@ public class Priority {
     }
 
     public static Priority getById(int id){
-        Priority p = new Priority();
+        Priority p = null;
         try {
             Connection connection = AccessDd.getConnection();
 
@@ -50,8 +61,11 @@ public class Priority {
             ResultSet result = statement.executeQuery("SELECT * FROM priorities WHERE priority_id =" + id);
 
             if (result.next()) {
+                p = new Priority(result.getInt("priority_id"), result.getString("name"));
+                /**
                 p.priority = result.getInt("priority_id");
                 p.desc = result.getString("name");
+                 */
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

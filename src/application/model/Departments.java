@@ -13,6 +13,16 @@ public class Departments {
 
     private static int num = 0;
 
+    public Departments(int id, String department){
+        nummer = id;
+        this.department = department;
+    }
+
+    public Departments(){
+        nummer = 0;
+        this.department = null;
+    }
+
     public String toString() {
         return nummer + "-" + department;
     }
@@ -31,7 +41,7 @@ public class Departments {
     }
 
     public static Departments getById(int id){
-        Departments p = new Departments();
+        Departments p = null;
         try {
             Connection connection = AccessDd.getConnection();
 
@@ -40,8 +50,11 @@ public class Departments {
             ResultSet result = statement.executeQuery("SELECT * FROM departments WHERE department_id =" + id);
 
             if (result.next()) {
+                p = new Departments(result.getInt("department_id"), result.getString("Name"));
+                /**
                 p.department = result.getString("Name");
                 p.nummer = result.getInt("department_id");
+                 */
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -56,8 +69,8 @@ public class Departments {
 
             PreparedStatement statement = null;
             statement = connection.prepareStatement("UPDATE departments SET name = ? where department_id = ?");
-            statement.setString(1, String.valueOf(nummer));
-            statement.setString(2, department);
+            statement.setString(2, String.valueOf(nummer));
+            statement.setString(1, department);
             statement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -75,9 +88,11 @@ public class Departments {
             ResultSet result = statement.executeQuery("SELECT * FROM departments");
 
             while (result.next()) {
-                Departments p = new Departments();
+                Departments p = new Departments(result.getInt("department_id"), result.getString("Name"));
+                /**
                 p.department = result.getString("Name");
                 p.nummer = result.getInt("department_id");
+                 */
 
                 list.add(p);
             }

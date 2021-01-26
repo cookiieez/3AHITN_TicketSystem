@@ -15,6 +15,16 @@ public class Status {
 
     private static int num = 0;
 
+    public Status(int id, String status){
+        nummer = id;
+        this.status = status;
+    }
+
+    public Status(){
+        nummer = 0;
+        this.status = null;
+    }
+
     public String toString() {
         return nummer + "-" + status;
     }
@@ -31,9 +41,11 @@ public class Status {
             ResultSet result = statement.executeQuery("SELECT * FROM stati");
 
             while (result.next()) {
-                Status s = new Status();
+                Status s = new Status(result.getInt("status_id"), result.getString("name"));
+                /**
                 s.nummer = result.getInt("status_id");
                 s.status = result.getString("name");
+                 */
                 list.add(s);
             }
         } catch (SQLException throwables) {
@@ -70,7 +82,7 @@ public class Status {
     }
 
     public static Status getById(int id){
-        Status s = new Status();
+        Status s = null;
         try {
             Connection connection = AccessDd.getConnection();
 
@@ -79,8 +91,11 @@ public class Status {
             ResultSet result = statement.executeQuery("SELECT * FROM stati WHERE status_id =" + id);
 
             if (result.next()) {
+                s = new Status(result.getInt("status_id"), result.getString("name"));
+                /**
                 s.nummer = result.getInt("status_id");
                 s.status = result.getString("name");
+                 **/
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

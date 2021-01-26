@@ -14,14 +14,38 @@ public class User {
     public String title = "";
     public String name = "";
     public String street = "";
-    public String zip;
+    public String zip = "";
     public String city = "";
     public Departments department;
 
     private static int num = 0;
 
+    public User(int id, String title, String name, String street, String zip, String city, int departmentId) {
+        userId = id;
+        this.title = title;
+        this.name = name;
+        this.street = street;
+        this.zip = zip;
+        this.city = city;
+
+        this.department = Departments.getById(departmentId);
+
+    }
+
+    public User(){
+        userId = 0;
+        this.title = null;
+        this.name = null;
+        this.street = null;
+        this.zip = null;
+        this.city = null;
+
+        this.department = null;
+    }
+
     public String toString() {
         return title + " " + name;
+
     }
 
     public static ObservableList<User> loadFile(String filename) {
@@ -38,7 +62,8 @@ public class User {
             ResultSet result = statement.executeQuery("SELECT * FROM user");
 
             while (result.next()) {
-                User u = new User();
+                User u = new User(result.getInt("user_id"), result.getString("title"), result.getString("name"), result.getString("street"), result.getString("zip"), result.getString("city"), result.getInt("department_id"));
+                /**
                 u.userId = result.getInt("user_id");
                 u.name = result.getString("name");
                 u.city = result.getString("city");
@@ -46,6 +71,7 @@ public class User {
                 u.title = result.getString("title");
                 u.zip = result.getString("zip");
                 u.department = Departments.getById(result.getInt("department_id"));
+                 */
 
                 list.add(u);
             }

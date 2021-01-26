@@ -13,10 +13,28 @@ public class Ticket {
     public int id = num;
     public String name = "";
     public String desc = "";
-    public Status status = new Status();
-    public Priority priority = new Priority();
+    public Status status;
+    public Priority priority;
 
     private static int num = 0;
+
+    public Ticket(int id, String name, String desc, int status_id, int priority_id){
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+
+        status = Status.getById(status_id);
+        priority = Priority.getById(priority_id);
+    }
+
+    public Ticket(){
+        this.id = 0;
+        this.name = null;
+        this.desc = null;
+
+        status = null;
+        priority = null;
+    }
 
     public String toString() {
         return  id + "-" + name;
@@ -33,12 +51,14 @@ public class Ticket {
             ResultSet result = statement.executeQuery("SELECT * FROM tickets");
 
             while (result.next()) {
-                Ticket t = new Ticket();
+                Ticket t = new Ticket(result.getInt("ticket_id"), result.getString("name"), result.getString("desc"), result.getInt("status_id"), result.getInt("priority_id"));
+                /**
                 t.id = result.getInt("ticket_id");
                 t.name = result.getString("name");
                 t.desc = result.getString("desc");
                 t.priority = Priority.getById(result.getInt("priority_id"));
                 t.status = Status.getById(result.getInt("status_id"));
+                 */
                 list.add(t);
             }
         } catch (SQLException throwables) {
@@ -55,7 +75,7 @@ public class Ticket {
 
             Statement statement = null;
             statement = connection.createStatement();
-            statement.executeUpdate("DELETE FROM priorities WHERE priority_id =" + priority);
+            statement.executeUpdate("DELETE FROM tickets WHERE ticket_id =" + id);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -67,7 +87,7 @@ public class Ticket {
             Connection connection = AccessDd.getConnection();
 
             PreparedStatement statement = null;
-            statement = connection.prepareStatement("UPDATE tickets SET name = ?, desc = ?, priority_id = ?, status_id = ? where ticket_id = ?");
+            statement = connection.prepareStatement("UPDATE tickets SET name = ?, desc = ?, priority_id = ?, status_id = ? WHERE ticket_id = ?");
             statement.setString(1, name);
             statement.setString(2, desc);
             statement.setInt(3, priority.priority);

@@ -42,15 +42,11 @@ public class Controller {
     ArrayList<Ticket> backup;
 
     public void initialize() {
-        Status s = new Status();
-        s.status = "Filter wählen";
-        s.nummer = -1;
+        Status s = new Status(-1, "Filter wählen");
         filterStatusComboBox.getItems().add(s);
         filterStatusComboBox.getItems().addAll(Status.loadFile());
 
-        Priority p = new Priority();
-        p.priority = -1;
-        p.desc = "Filter wählen";
+        Priority p = new Priority(-1, "Filter wählen");
         filterPriorityComboBox.getItems().addAll(p);
         filterPriorityComboBox.getItems().addAll(Priority.loadList());
 
