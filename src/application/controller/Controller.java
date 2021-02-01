@@ -27,13 +27,10 @@ public class Controller {
     ObservableList<Ticket> liste = FXCollections.observableArrayList();
 
     public TextField filterNameTextField; // filtern nach name des Todos
-    ObservableList<Ticket> searchNameList = FXCollections.observableArrayList();
 
     public ComboBox<Status> filterStatusComboBox; // filtern nach Status
-    ObservableList<Ticket> searchStatiList = FXCollections.observableArrayList();
 
     public ComboBox<Priority> filterPriorityComboBox; // filtern nach Priorität
-    ObservableList<Ticket> searchPrioList = FXCollections.observableArrayList();
 
     private ControllerTickets active = null;
 

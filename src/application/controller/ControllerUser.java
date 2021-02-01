@@ -24,7 +24,7 @@ public class ControllerUser extends User {
 
 
     public void initialize(){
-        userView.setItems(User.loadFile("users.csv"));
+        userView.setItems(User.loadFile());
         departmentIdCombo.setItems(Departments.loadList());
     }
 

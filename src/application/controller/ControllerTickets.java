@@ -3,16 +3,17 @@ package application.controller;
 import application.model.Priority;
 import application.model.Status;
 import application.model.Ticket;
+import application.model.User;
 import javafx.event.ActionEvent;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class ControllerTickets {
     public TextArea commentarea;
     public TextField titlefield;
     public ComboBox<Status> ticketStati;
     public ComboBox<Priority> ticketPriority;
+    public ComboBox<User> userComboBox;
+    public ListView choosnUserListview;
 
     private Ticket ticket;
 
@@ -25,6 +26,7 @@ public class ControllerTickets {
         commentarea.setText(t.desc);
         ticketStati.setItems(Status.loadFile());
         ticketPriority.setItems(Priority.loadList());
+        userComboBox.setItems(User.loadFile());
 
         for (Status s : ticketStati.getItems()) {
             if (s.nummer == t.status.nummer) {
@@ -38,6 +40,8 @@ public class ControllerTickets {
                 ticketPriority.getSelectionModel().select(p);
             }
         }
+
+
 
 
         ticket = t;
@@ -58,6 +62,10 @@ public class ControllerTickets {
         return ticket;
     }
 
-    public void sendComment(ActionEvent actionEvent) {
+
+    public void addButtonClicked(ActionEvent actionEvent) {
+        if(userComboBox.getSelectionModel().getSelectedItem() != null){
+            choosnUserListview.getItems().add(userComboBox.getSelectionModel().getSelectedItem());
+        }
     }
 }

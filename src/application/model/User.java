@@ -48,7 +48,7 @@ public class User {
 
     }
 
-    public static ObservableList<User> loadFile(String filename) {
+    public static ObservableList<User> loadFile() {
         ObservableList<User> list = FXCollections.observableArrayList();
         String zeile = null;
         BufferedReader br = null;
@@ -79,6 +79,29 @@ public class User {
 
         }
         return list;
+    }
+
+    public static User getById(int id){
+        User u = null;
+        try {
+            Connection connection = AccessDd.getConnection();
+
+            Statement statement = null;
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM user WHERE user_id =" + id);
+
+            if (result.next()) {
+                u = new User(result.getInt("user_id"), result.getString("title"), result.getString("name"), result.getString("street"), result.getString("zip"), result.getString("city"), result.getInt("department_id"));
+                /**
+                 s.nummer = result.getInt("status_id");
+                 s.status = result.getString("name");
+                 **/
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return u;
     }
 
     public void delete(){
