@@ -103,6 +103,7 @@ public class Status {
 
         return s;
     }
+    //Hallo was geht
 
     public static void writeFile(String filename, ObservableList<Status> liste) {
 
