@@ -64,8 +64,18 @@ public class ControllerTickets {
 
 
     public void addButtonClicked(ActionEvent actionEvent) {
-        if(userComboBox.getSelectionModel().getSelectedItem() != null){
+        if(userComboBox.getSelectionModel().getSelectedItem() != null && !choosnUserListview.getItems().contains(userComboBox.getSelectionModel().getSelectedItem())){
             choosnUserListview.getItems().add(userComboBox.getSelectionModel().getSelectedItem());
         }
+    }
+
+    public void delButtonClicked(ActionEvent actionEvent) {
+        if (choosnUserListview.getSelectionModel().getSelectedItem() != null) {
+            choosnUserListview.getItems().remove(choosnUserListview.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    public ListView getChoosnUserListview() {
+        return choosnUserListview;
     }
 }

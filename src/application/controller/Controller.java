@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.MyFXMLLoader;
+import application.model.AccessDd;
 import application.model.Priority;
 import application.model.Status;
 import application.model.Ticket;
@@ -15,6 +16,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -106,7 +110,26 @@ public class Controller {
 
         ticketListView.refresh();
 
-        Ticket.writeFile("tickets.csv", liste);
+        updateUsers();
+
+    }
+
+    public void updateUsers(){
+        ControllerTickets c = new ControllerTickets();
+        try{
+            Connection connection = AccessDd.getConnection();
+
+            PreparedStatement statement = null;
+
+            statement = connection.prepareStatement("SELECT * FROM user_to_tickets");
+
+            System.out.println(statement.toString());
+
+
+            statement.executeUpdate();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void newClicked(ActionEvent actionEvent) {

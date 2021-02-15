@@ -26,5 +26,6 @@
       <ListView fx:id="choosnUserListview" layoutX="256.0" layoutY="420.0" prefHeight="97.0" prefWidth="200.0" AnchorPane.leftAnchor="256.0" AnchorPane.rightAnchor="118.0" AnchorPane.topAnchor="420.0" />
       <Label layoutX="72.0" layoutY="388.0" text="Alle Benutzer" AnchorPane.leftAnchor="72.0" AnchorPane.topAnchor="388.0" />
       <Label layoutX="256.0" layoutY="388.0" text="Ausgewählte Benutzer" AnchorPane.leftAnchor="256.0" AnchorPane.topAnchor="388.0" />
+      <Button layoutX="70.0" layoutY="491.0" mnemonicParsing="false" onAction="#delButtonClicked" text="Benutzer löschen" />
     </children>
 </AnchorPane>
